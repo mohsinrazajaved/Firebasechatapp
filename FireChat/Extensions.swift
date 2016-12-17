@@ -52,3 +52,24 @@ extension UIAlertController
     }
 }
 
+
+
+
+extension PageViewController : UIPageViewControllerDataSource
+{
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
+    {
+        var index = (viewController as! WalkthroughViewController).index
+        index += 1
+        return self.viewControllerAtIndex(index)
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        var index = (viewController as! WalkthroughViewController).index
+        index -= 1
+        return self.viewControllerAtIndex(index)
+    }
+}
+
+
+
