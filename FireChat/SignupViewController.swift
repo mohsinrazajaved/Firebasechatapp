@@ -79,8 +79,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
                 }
                 
                 self.storeInfoInStorage(uid,email,name)
-                
-                print("yes1")
             }
     }
     
@@ -89,28 +87,28 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
     {
         //unique uid for each image
         let imageName = UUID().uuidString
-         let storageRef = FireService.fireservice.STORAGE_IMAGES.child("\(imageName).png")
-        print("yes2")
+        let storageRef = FireService.fireservice.STORAGE_IMAGES.child("\(imageName).png")
 
-        if let uploadData = UIImagePNGRepresentation(self.Profilepic.image!)
-        { print("image format error")
-    
+        guard let pngImg = self.Profilepic.image else
+        {
+           return
+        }
+        
+        if let uploadData = UIImagePNGRepresentation(pngImg)
+        {
             storageRef.put(uploadData, metadata: nil)
             {(metadata, error) in
-                print("yes3")
-
+               
                 if error != nil
                 {
                    self.alert.create(title: "Oops!", message: "Having some trouble storing your data. Try again.")
                    return
                 }
-                
+
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString
                 {
                     let values = ["name": user_Name, "email": user_Email, "profileImageUrl": profileImageUrl] as [String:String]
                     self.registerUserIntoDatabaseWithUID(uid_User,values)
-                    print("yes4")
-
                 }
             }
         }
@@ -132,8 +130,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
             }
            
             MBProgressHUD.hide(for: self.view, animated: true)
-            print("yes5")
-            self.dismiss(animated: true, completion: nil)
+            weakself?.dismiss(animated: true, completion: nil)
         }
         
     }

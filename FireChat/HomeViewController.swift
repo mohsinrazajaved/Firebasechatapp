@@ -19,8 +19,8 @@ class HomeViewController: UIViewController
     
     override func viewDidLoad()
     {
-        //profileimage.layer.cornerRadius = self.profileimage.frame.size.width / 2;
-        //rprofileimage.clipsToBounds = true;
+        profileimage.layer.cornerRadius = self.profileimage.frame.size.width / 2;
+        profileimage.clipsToBounds = true;
         isUserLogin()
     }
     
@@ -36,38 +36,49 @@ class HomeViewController: UIViewController
          usersReference.observeSingleEvent(of:.value, with:
             {(Snapshot) in
             
-                print(Snapshot)
-            
             if let dictionary =  Snapshot.value as? [String:String]
             {
-                DispatchQueue.main.async
+                if let dict = dictionary["name"], let picurl = dictionary["profileImageUrl"], let url = URL(string: picurl)
                 {
-                    if let dict = dictionary["name"]
+                    
+                URLSession.shared.dataTask(with: url,completionHandler:
+                {(data, response, error) in
+                 
+                    if error != nil
                     {
-                        self.userName?.text = dict
+                     
+                      print("error")
+                      return
+                    
                     }
-                }
-            }
+                    
+                    DispatchQueue.main.async
+                    {
+                      self.userName?.text = dict
+                      self.profileimage?.image = UIImage(data: data!)
+                    }
+                 }).resume()
+                    
+              }
+           
+           }
             
         }, withCancel: nil)
      }
   }
+    
     @IBAction func finished(_: AnyObject?)
     {
-        self.dismiss(animated: true, completion: nil)
-    }
-    @IBAction func Signoutmenu(_ sender: UIButton)
-    {
-       
-//        do
-//        {
-//           try FIRAuth.auth()?.signOut()
-//        }
-//        catch
-//        {
-//            print(error)
-//        }
+        do
+        {
+          try FIRAuth.auth()?.signOut()
+        }
+        catch
+        {
+            print(error)
+        }
+
+    self.dismiss(animated: true, completion: nil)
         
-        self.presentedViewController?.dismiss(animated: true)
     }
 }
