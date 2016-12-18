@@ -21,6 +21,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
    
     let imagePicker = UIImagePickerController()
     let alert  = UIAlertController()
+    let obj = Users()
     
     
     override func viewDidLoad()
@@ -57,13 +58,13 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
         loadingNotification.mode = MBProgressHUDMode.indeterminate
         loadingNotification.label.text = "Loading"
         
-        guard let email = Email.text ,let password = Password.text,let name = Username.text else
+        guard let myemail = Email.text ,let mypassword = Password.text,let myname = Username.text else
         {
             alert.create(title: "Oops!",message: "Try again.")
             return
         }
         
-        FIRAuth.auth()?.createUser(withEmail: email,password: password)
+        FIRAuth.auth()?.createUser(withEmail: myemail,password: mypassword)
             {(user,error) in
                 
                 if(error != nil)
@@ -77,13 +78,15 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
                 {
                     return
                 }
-                
-                self.storeInfoInStorage(uid,email,name)
+            
+                self.obj.name = myname
+                self.obj.email = myemail
+                self.storeInfoInStorage(uid,self.obj)
             }
     }
     
     
-    private func storeInfoInStorage(_ uid_User:String,_ user_Email:String,_ user_Name:String)
+    private func storeInfoInStorage(_ uid_user:String,_ info:Users)
     {
         //unique uid for each image
         let imageName = UUID().uuidString
@@ -107,8 +110,9 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
 
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString
                 {
-                    let values = ["name": user_Name, "email": user_Email, "profileImageUrl": profileImageUrl] as [String:String]
-                    self.registerUserIntoDatabaseWithUID(uid_User,values)
+                    
+                    let values = ["name":info.name!, "email":info.email!, "profileImageUrl": profileImageUrl] as [String:String]
+                    self.registerUserIntoDatabaseWithUID(uid_user,values)
                 }
             }
         }

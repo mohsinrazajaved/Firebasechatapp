@@ -45,7 +45,10 @@ class LoginViewController:UIViewController,UITextFieldDelegate
     
     @IBAction func Logintofirebase(_ sender: UIButton)
     {
-        
+        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingNotification.mode = MBProgressHUDMode.indeterminate
+        loadingNotification.label.text = "Loading"
+
       guard let email = Email.text,let password = Password.text else
       {
           alert.create(title: "Oops!",message: "Try again.")
@@ -63,6 +66,7 @@ class LoginViewController:UIViewController,UITextFieldDelegate
                 
                 }
             
+            MBProgressHUD.hide(for: self.view, animated: true)
             let mainStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
             let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Home") as UIViewController
             self.present(vc, animated: true, completion: nil)

@@ -29,6 +29,9 @@
 		1F921DAE1DEDC6EE00712483 /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F921DA91DEDC6EE00712483 /* Karla-Regular.ttf */; };
 		1F921DAF1DEDC6EE00712483 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F921DAA1DEDC6EE00712483 /* OFL.txt */; };
 		1FA260851DEF0F6200244595 /* FireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA260841DEF0F6200244595 /* FireService.swift */; };
+		1FA538F31E05A3DF00D0277C /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA538F21E05A3DF00D0277C /* UsersTableViewController.swift */; };
+		1FA538F51E05AD4D00D0277C /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA538F41E05AD4D00D0277C /* Users.swift */; };
+		1FA538F71E05B93100D0277C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA538F61E05B93100D0277C /* TableViewCell.swift */; };
 		1FD6E7AD1E03F52300165F6B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6E7AC1E03F52300165F6B /* MBProgressHUD.m */; };
 		1FD6FEFF1DFDECEF00878166 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FD6FEFE1DFDECEF00878166 /* GoogleService-Info.plist */; };
 		46D71631DAE56BD524C5ED65 /* Pods_FireChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6555CD0685A68CDD0BE9A839 /* Pods_FireChat.framework */; };
@@ -81,6 +84,9 @@
 		1F921DA91DEDC6EE00712483 /* Karla-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Regular.ttf"; sourceTree = "<group>"; };
 		1F921DAA1DEDC6EE00712483 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		1FA260841DEF0F6200244595 /* FireService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireService.swift; sourceTree = "<group>"; };
+		1FA538F21E05A3DF00D0277C /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
+		1FA538F41E05AD4D00D0277C /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		1FA538F61E05B93100D0277C /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		1FD6E7AA1E03F52200165F6B /* FireChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FireChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		1FD6E7AB1E03F52300165F6B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		1FD6E7AC1E03F52300165F6B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -193,6 +199,8 @@
 				1F921D9C1DEDC6E300712483 /* PageViewController.swift */,
 				1F921D9D1DEDC6E300712483 /* WalkthroughViewController.swift */,
 				1F921D9E1DEDC6E300712483 /* HomeViewController.swift */,
+				1FA538F21E05A3DF00D0277C /* UsersTableViewController.swift */,
+				1FA538F61E05B93100D0277C /* TableViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -225,6 +233,7 @@
 			children = (
 				1FA260841DEF0F6200244595 /* FireService.swift */,
 				1F7A79921DF1E38300623751 /* Extensions.swift */,
+				1FA538F41E05AD4D00D0277C /* Users.swift */,
 			);
 			name = Modals;
 			sourceTree = "<group>";
@@ -553,12 +562,15 @@
 			files = (
 				1F921D9F1DEDC6E300712483 /* LoginViewController.swift in Sources */,
 				1F921DA31DEDC6E300712483 /* WalkthroughViewController.swift in Sources */,
+				1FA538F31E05A3DF00D0277C /* UsersTableViewController.swift in Sources */,
 				1F921DA11DEDC6E300712483 /* PasswordViewController.swift in Sources */,
 				1F921D6D1DEDC61700712483 /* FireChat.xcdatamodeld in Sources */,
+				1FA538F71E05B93100D0277C /* TableViewCell.swift in Sources */,
 				1FD6E7AD1E03F52300165F6B /* MBProgressHUD.m in Sources */,
 				1F921DA21DEDC6E300712483 /* PageViewController.swift in Sources */,
 				1F7A79931DF1E38300623751 /* Extensions.swift in Sources */,
 				1FA260851DEF0F6200244595 /* FireService.swift in Sources */,
+				1FA538F51E05AD4D00D0277C /* Users.swift in Sources */,
 				1F921DA01DEDC6E300712483 /* SignupViewController.swift in Sources */,
 				1F921D651DEDC61700712483 /* AppDelegate.swift in Sources */,
 				1F921DA41DEDC6E300712483 /* HomeViewController.swift in Sources */,

@@ -34,11 +34,11 @@ class HomeViewController: UIViewController
      let uid = FIRAuth.auth()?.currentUser?.uid
      let usersReference = FireService.fireservice.BASE_REF.child("users").child(uid!)
          usersReference.observeSingleEvent(of:.value, with:
-            {(Snapshot) in
+        {(Snapshot) in
             
             if let dictionary =  Snapshot.value as? [String:String]
             {
-                if let dict = dictionary["name"], let picurl = dictionary["profileImageUrl"], let url = URL(string: picurl)
+                if let dict = dictionary["name"], let picurl = dictionary["profileImageUrl"], let url = URL(string:picurl)
                 {
                     
                 URLSession.shared.dataTask(with: url,completionHandler:
@@ -46,16 +46,19 @@ class HomeViewController: UIViewController
                  
                     if error != nil
                     {
-                     
-                      print("error")
-                      return
                     
+                      print(error?.localizedDescription as Any)
+                      return
                     }
                     
                     DispatchQueue.main.async
                     {
                       self.userName?.text = dict
-                      self.profileimage?.image = UIImage(data: data!)
+                    
+                        if let image = data
+                        {
+                          self.profileimage?.image = UIImage(data:image)
+                        }
                     }
                  }).resume()
                     
@@ -78,7 +81,7 @@ class HomeViewController: UIViewController
             print(error)
         }
 
-    self.dismiss(animated: true, completion: nil)
+      self.dismiss(animated: true, completion: nil)
         
     }
 }
