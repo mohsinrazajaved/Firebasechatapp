@@ -90,14 +90,14 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
     {
         //unique uid for each image
         let imageName = UUID().uuidString
-        let storageRef = FireService.fireservice.STORAGE_IMAGES.child("\(imageName).png")
+        let storageRef = FireService.fireservice.STORAGE_IMAGES.child("\(imageName).jpg")
 
         guard let pngImg = self.Profilepic.image else
         {
            return
         }
         
-        if let uploadData = UIImagePNGRepresentation(pngImg)
+        if let uploadData = UIImageJPEGRepresentation(pngImg,0.1)
         {
             storageRef.put(uploadData, metadata: nil)
             {(metadata, error) in
@@ -122,7 +122,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
     {
         
         let usersReference = FireService.fireservice.BASE_REF.child("users").child(uid)
-        
         usersReference.updateChildValues(values)
         {[weak weakself = self](error, ref) in
             

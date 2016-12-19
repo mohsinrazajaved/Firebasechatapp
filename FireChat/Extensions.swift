@@ -8,6 +8,8 @@
 
 import UIKit
 
+ let imageCache = NSCache<NSString,UIImage>()
+
 extension UIAlertController
 {
     
@@ -70,6 +72,61 @@ extension PageViewController : UIPageViewControllerDataSource
         return self.viewControllerAtIndex(index)
     }
 }
+
+
+extension UIImageView
+{
+    
+    func downloadImageswithUrl(urlString:String)
+    {
+        self.image = nil
+        
+        if let cachedImages = imageCache.object(forKey:urlString as NSString)
+        {
+            
+            self.image = cachedImages
+            return
+            
+        }
+        
+        
+        if let url = URL(string:urlString)
+        {
+            //downloading the images
+            URLSession.shared.dataTask(with:url,completionHandler:
+                {(data, response, error) in
+                    
+                    if error != nil
+                    {
+                        
+                        print("error")
+                        return
+                    }
+                    
+                    //updating our ui on the main thread
+                    DispatchQueue.main.async
+                    {
+                        if let image = data
+                        {
+                            if let downloadImage = UIImage(data:image)
+                            {
+                                
+                                imageCache.setObject(downloadImage, forKey: urlString as NSString)
+                                self.image = downloadImage
+                                
+                            }
+                        }
+                    }
+                    
+            }).resume()
+      }
+
+
+    }
+
+}
+
+
 
 
 
