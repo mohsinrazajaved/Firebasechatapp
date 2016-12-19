@@ -25,50 +25,50 @@ class HomeViewController: UIViewController
     }
     
     
-   private func isUserLogin()
-   {
-    
-     if FIRAuth.auth()?.currentUser?.uid != nil
-     {
-    
-     let uid = FIRAuth.auth()?.currentUser?.uid
-     let usersReference = FireService.fireservice.BASE_REF.child("users").child(uid!)
-         usersReference.observeSingleEvent(of:.value, with:
-        {(Snapshot) in
+    private func isUserLogin()
+    {
+        
+        if FIRAuth.auth()?.currentUser?.uid != nil
+        {
             
-            if let dictionary =  Snapshot.value as? [String:String]
-            {
-                if let dict = dictionary["name"], let picurl = dictionary["profileImageUrl"], let url = URL(string:picurl)
-                {
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            let usersReference = FireService.fireservice.BASE_REF.child("users").child(uid!)
+            usersReference.observeSingleEvent(of:.value, with:
+                {(Snapshot) in
                     
-                URLSession.shared.dataTask(with: url,completionHandler:
-                {(data, response, error) in
-                 
-                    if error != nil
+                    if let dictionary =  Snapshot.value as? [String:String]
                     {
-                    
-                      print(error?.localizedDescription as Any)
-                      return
-                    }
-                    
-                    DispatchQueue.main.async
-                    {
-                      self.userName?.text = dict
-                    
-                        if let image = data
+                        if let dict = dictionary["name"], let picurl = dictionary["profileImageUrl"], let url = URL(string:picurl)
                         {
-                          self.profileimage?.image = UIImage(data:image)
+                            
+                            URLSession.shared.dataTask(with: url,completionHandler:
+                                {(data, response, error) in
+                                    
+                                    if error != nil
+                                    {
+                                        
+                                        print(error?.localizedDescription as Any)
+                                        return
+                                    }
+                                    
+                                    DispatchQueue.main.async
+                                        {
+                                            self.userName?.text = dict
+                                            
+                                            if let image = data
+                                            {
+                                                self.profileimage?.image = UIImage(data:image)
+                                            }
+                                    }
+                            }).resume()
+                            
                         }
+                        
                     }
-                 }).resume()
                     
-              }
-           
-           }
-            
-        }, withCancel: nil)
-     }
-  }
+            }, withCancel: nil)
+        }
+    }
     
     @IBAction func finished(_: AnyObject?)
     {
