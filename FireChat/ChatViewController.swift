@@ -9,25 +9,48 @@
 import UIKit
 import Firebase
 
-private let reuseIdentifier = "Cell"
-
 class ChatViewController:UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 {
-    @IBOutlet weak var messageBox: UITextField!
+   
     
+    @IBOutlet weak var messageBox: UITextField!
+    @IBOutlet weak var navTitle: UINavigationItem!
+    var userid:String?
+    var bartitle:String?
+    
+    
+    var chatUserName:AnyObject?
+    {
+        didSet
+        {
+            if let object1 = chatUserName as? Users
+            {
+                bartitle = object1.name
+                userid = object1.id
+            }
+            
+            if let object2 = chatUserName as? Message
+            {
+               bartitle = object2.text
+            }
+        }
+    
+    }
     
     @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad()
     {
+        
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-
-                // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "msg")
-        
+        self.navTitle.title = bartitle
     
+
+    // Register cell classes
+    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "msg")
+        
     }
 
     // MARK: UICollectionViewDataSource
@@ -53,15 +76,18 @@ class ChatViewController:UIViewController,UICollectionViewDataSource, UICollecti
     
     @IBAction func sendMessage(_ sender: UIButton)
     {
-        
-        guard let messg = self.messageBox?.text else
+        //guard statements works like if let ,but does not bound you
+        guard let messg = self.messageBox?.text , let toid = userid ,let fromid = FIRAuth.auth()?.currentUser?.uid  else
         {
             return
         }
         
         let usersReference = FireService.fireservice.BASE_REF.child("messages")
         let childRef = usersReference.childByAutoId()
-        let values = ["text":messg]
+        let timeStamp = Int(NSDate().timeIntervalSince1970)
+        
+
+        let values = ["text":messg,"toid":toid,"fromid":fromid,"timestamp":String(timeStamp)]
         childRef.updateChildValues(values)
     }
     

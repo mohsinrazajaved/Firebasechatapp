@@ -9,56 +9,60 @@
 import UIKit
 import Firebase
 
-class UsersTableViewController: UITableViewController
+class UsersTableViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
 {
     var userArray = [Users]()
-    
+    var selectedLabel:Users?
+
+    @IBOutlet weak var table: UITableView!
     override func viewDidLoad()
     {
-        
-       
-        
         super.viewDidLoad()
-//        if FIRAuth.auth()?.currentUser?.uid == nil
-//        {
-            let usersReference = FireService.fireservice.BASE_REF.child("users")
         
-            usersReference.observe(.childAdded, with:
+        table.delegate = self
+        table.dataSource = self
+        self.observeContacts()
+    }
+    
+    private func observeContacts()
+    {
+    
+       // if FIRAuth.auth()?.currentUser?.uid == nil
+        //        {
+        let usersReference = FireService.fireservice.BASE_REF.child("users")
+        
+        usersReference.observe(.childAdded, with:
             {(Snapshot) in
                 
-               if let dictionary =  Snapshot.value as? [String:String]
-               {
-               
-                  let obj = Users()
-                  obj.setValuesForKeys(dictionary)
-                  self.userArray.append(obj)
-                  print(Snapshot)
-                
-                DispatchQueue.main.async
+                if let dictionary =  Snapshot.value as? [String:String]
                 {
-                   self.tableView.reloadData()
+                    
+                    let obj = Users()
+                    obj.id = Snapshot.key
+                    obj.setValuesForKeys(dictionary)
+                    self.userArray.append(obj)
+                    
+                    DispatchQueue.main.async
+                    {
+                      self.table.reloadData()
+                    }
                 }
                 
-                
-               }
-                
-                
-            }, withCancel: nil)
-       // }
-
+        }, withCancel: nil)
+        //}
     }
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return userArray.count
     }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        
         //this line is going to use the cells instead of creating them so
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier:"CustomCellOne",for: indexPath)
         
         if let myCell = cell as? TableViewCell
         {
@@ -79,14 +83,23 @@ class UsersTableViewController: UITableViewController
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        
+        selectedLabel = self.userArray[indexPath.row]
+        performSegue(withIdentifier:"Messages1", sender:self)
+    }
     
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-       
-    
+        if segue.identifier != nil
+        {
+            if let destinationvc = segue.destination as? ChatViewController
+            {
+                destinationvc.chatUserName = selectedLabel
+            }
+        }
     }
-
-
 }
