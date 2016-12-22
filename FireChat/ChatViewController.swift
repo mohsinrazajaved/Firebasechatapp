@@ -11,12 +11,12 @@ import Firebase
 
 class ChatViewController:UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 {
-   
-    
+    @IBOutlet weak var chatuiimage: UIImageView!
     @IBOutlet weak var messageBox: UITextField!
     @IBOutlet weak var navTitle: UINavigationItem!
     var userid:String?
     var bartitle:String?
+    var imgurl:String?
     
     
     var chatUserName:AnyObject?
@@ -27,14 +27,9 @@ class ChatViewController:UIViewController,UICollectionViewDataSource, UICollecti
             {
                 bartitle = object1.name
                 userid = object1.id
-            }
-            
-            if let object2 = chatUserName as? Message
-            {
-               bartitle = object2.text
+                imgurl = object1.profileImageUrl
             }
         }
-    
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -45,14 +40,21 @@ class ChatViewController:UIViewController,UICollectionViewDataSource, UICollecti
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        chatuiimage.layer.cornerRadius = chatuiimage.frame.size.width / 2;
+        chatuiimage.clipsToBounds = true;
+        chatuiimage.layer.borderWidth = 1
         self.navTitle.title = bartitle
-    
 
+        if imgurl != nil
+        {
+          chatuiimage.downloadImageswithUrl(urlString:imgurl!)
+        }
+    
     // Register cell classes
     self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "msg")
         
     }
-
+    
     // MARK: UICollectionViewDataSource
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -72,7 +74,6 @@ class ChatViewController:UIViewController,UICollectionViewDataSource, UICollecti
     
         return cell
     }
-
     
     @IBAction func sendMessage(_ sender: UIButton)
     {
@@ -85,10 +86,35 @@ class ChatViewController:UIViewController,UICollectionViewDataSource, UICollecti
         let usersReference = FireService.fireservice.BASE_REF.child("messages")
         let childRef = usersReference.childByAutoId()
         let timeStamp = Int(NSDate().timeIntervalSince1970)
-        
-
+    
         let values = ["text":messg,"toid":toid,"fromid":fromid,"timestamp":String(timeStamp)]
+        
+        
         childRef.updateChildValues(values)
+        {(error, databaseReference) in
+        
+            if error != nil
+            {
+              
+                print(error.debugDescription)
+                return
+            
+            }
+            
+            let msgReference = FireService.fireservice.BASE_REF.child("user messages").child(fromid)
+            let autoRef = childRef.key
+            msgReference.updateChildValues([autoRef:1])
+
+            let recipentUserMessageReference = FireService.fireservice.BASE_REF.child("user messages").child(toid)
+            recipentUserMessageReference.updateChildValues([autoRef:1])
+
+        }
+        
     }
     
 }
+
+
+
+
+

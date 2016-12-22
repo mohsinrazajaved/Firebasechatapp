@@ -21,6 +21,8 @@ class PasswordViewController: UIViewController,UITextFieldDelegate
     {
         
          Email.delegate = self
+         self.navigationController?.isNavigationBarHidden = false
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool

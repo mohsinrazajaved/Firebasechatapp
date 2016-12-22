@@ -23,6 +23,7 @@ class LoginViewController:UIViewController,UITextFieldDelegate
         super.viewDidLoad()
         Email.delegate = self
         Password.delegate = self
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle
@@ -52,6 +53,8 @@ class LoginViewController:UIViewController,UITextFieldDelegate
       guard let email = Email.text,let password = Password.text else
       {
           alert.create(title: "Oops!",message: "Try again.")
+          MBProgressHUD.hide(for: self.view, animated: true)
+
           return
       }
         
@@ -62,6 +65,8 @@ class LoginViewController:UIViewController,UITextFieldDelegate
                 {
                     
                  weakself?.alert.create(title: "Oops!", message: "Having some trouble sigin your account. Try again.")
+                    MBProgressHUD.hide(for: self.view, animated: true)
+
                  return
                 
                 }

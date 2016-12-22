@@ -10,9 +10,12 @@ import UIKit
 import Firebase
 class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 {
+
+    var chatuserArray = [Users]()
     var messageArray = [Message]()
-    var selectedLabel:Message?
-    
+    var messageDictionary = [String:Message]()
+    static var selfobj:RecentMessagesViewController?
+    var selectedLabel:Users?
     @IBOutlet weak var table: UITableView!
     
     
@@ -21,45 +24,63 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
+        chatuserArray.removeAll()
+        messageArray.removeAll()
+        messageDictionary.removeAll()
         self.observeMsg()
     }
     
-    
     private func observeMsg()
     {
-        //if FIRAuth.auth()?.currentUser?.uid == nil
-        //        {
-        let usersReference = FireService.fireservice.BASE_REF.child("messages")
+        if let uid = FIRAuth.auth()?.currentUser?.uid
+        {
+            
+        let usersReference = FireService.fireservice.BASE_REF.child("user messages").child(uid)
         usersReference.observe(.childAdded, with:
-            {(Snapshot) in
+        {(Snapshot) in
+            
+            let messageReference = FireService.fireservice.BASE_REF.child("messages").child(Snapshot.key)
+            
+            messageReference.observeSingleEvent(of:.value, with:
+            {(DataSnapshot) in
                 
-                if let dictionary =  Snapshot.value as? [String:String]
+             
+                if let dict =  DataSnapshot.value as? [String:String]
                 {
+                    let message = Message()
+                    message.setValuesForKeys(dict)
                     
-                    let obj = Message()
-                    obj.setValuesForKeys(dictionary)
-                    self.messageArray.append(obj)
-                    print(Snapshot)
-                    
-                    DispatchQueue.main.async
+                    if let toId = message.toid
+                    {
+                        self.messageDictionary[toId] = message
+                        self.messageArray = Array(self.messageDictionary.values)
+                        self.messageArray = self.messageArray.sorted
                         {
-                            self.table.reloadData()
+                                
+                            (NumberFormatter().number(from: $0.timestamp!)?.intValue)!
+                                                       >
+                            (NumberFormatter().number(from: $1.timestamp!)?.intValue)!
+                                
+                        }
                     }
                     
+                    DispatchQueue.main.async
+                    {
+                        self.table.reloadData()
+                    }
                 }
-        })
-        // }
+            
+            })
+         })
+            
+      }
+   }
         
-        
-    }
-    
-    
-    // MARK: - Table view data source
+       // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return messageArray
-            .count
+        return messageArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -69,17 +90,8 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
         
         if let myCell = cell as? ChatViewCell
         {
-            
-            let users = messageArray[indexPath.row]
-            myCell.chatusername?.text = users.text
-           
-//            if let imageurl = users.profileImageUrl
-//            {
-//                myCell.userimage.layer.cornerRadius = myCell.userimage.frame.size.width / 2;
-//                myCell.userimage.clipsToBounds = true;
-//                myCell.userimage.downloadImageswithUrl(urlString:imageurl)
-//            }
-            
+             let mesg = messageArray[indexPath.row]
+             myCell.userdata(msg: mesg)
         }
         
         return cell
@@ -88,7 +100,7 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
-        selectedLabel = self.messageArray[indexPath.row]
+        //selectedLabel = self.chatuserArray[indexPath.row]
         performSegue(withIdentifier:"Messages2", sender:self)
     }
     
@@ -101,12 +113,27 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
         {
             if let destinationvc = segue.destination as? ChatViewController
             {
-                destinationvc.chatUserName = selectedLabel
+              //destinationvc.chatUserName = selectedLabel
             }
-            
         }
         
     }
     
+    @IBAction func LogOut(_ sender: UIBarButtonItem)
+    {
+        do
+        {
+            try FIRAuth.auth()?.signOut()
+            let mainStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
+            let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Login") as UIViewController
+            self.present(vc, animated: true, completion: nil)
 
+        }
+        
+        catch
+        {
+          print("error")
+        }
+        
+    }
 }

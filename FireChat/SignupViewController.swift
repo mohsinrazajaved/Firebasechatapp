@@ -33,6 +33,8 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
           Profilepic.layer.cornerRadius = self.Profilepic.frame.size.width / 2;
           Profilepic.clipsToBounds = true;
           Profilepic.image = UIImage(named: "user")
+          self.navigationController?.isNavigationBarHidden = false
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -61,6 +63,8 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
         guard let myemail = Email.text ,let mypassword = Password.text,let myname = Username.text else
         {
             alert.create(title: "Oops!",message: "Try again.")
+            MBProgressHUD.hide(for: self.view, animated: true)
+
             return
         }
         
@@ -71,11 +75,14 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
                 {
                     
                   self.alert.create(title: "Oops!", message: "Having some trouble creating your account. Try again.")
+                    MBProgressHUD.hide(for: self.view, animated: true)
+
                   return
                 }
                 
                 guard let uid = user?.uid else
                 {
+                    MBProgressHUD.hide(for: self.view, animated: true)
                     return
                 }
             
@@ -94,7 +101,8 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
 
         guard let pngImg = self.Profilepic.image else
         {
-           return
+            MBProgressHUD.hide(for: self.view, animated: true)
+            return
         }
         
         if let uploadData = UIImageJPEGRepresentation(pngImg,0.1)
@@ -105,6 +113,8 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
                 if error != nil
                 {
                    self.alert.create(title: "Oops!", message: "Having some trouble storing your data. Try again.")
+                    MBProgressHUD.hide(for: self.view, animated: true)
+
                    return
                 }
 
@@ -129,11 +139,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
             {
                 
                weakself?.alert.create(title: "Oops!", message: "Having some trouble in database Try again.")
+                MBProgressHUD.hide(for: self.view, animated: true)
+
                return
             }
            
             MBProgressHUD.hide(for: self.view, animated: true)
-            weakself?.dismiss(animated: true, completion: nil)
         }
         
     }
