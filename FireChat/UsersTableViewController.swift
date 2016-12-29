@@ -7,87 +7,23 @@
 //
 
 import UIKit
-import Firebase
 
-class UsersTableViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
+
+class UsersTableViewController: UIViewController
 {
     var userArray = [Users]()
     var selectedLabel:Users?
+    private var presenter:UsersTablePresenter?
 
     @IBOutlet weak var table: UITableView!
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        presenter = UsersTablePresenter()
+        presenter?.delegate = self
         table.delegate = self
         table.dataSource = self
-        self.observeContacts()
-    }
-    
-    private func observeContacts()
-    {
-    
-     if FIRAuth.auth()?.currentUser?.uid != nil
-     {
-        let usersReference = FireService.fireservice.BASE_REF.child("users")
-        
-        usersReference.observe(.childAdded, with:
-        {(Snapshot) in
-                
-                if let dictionary =  Snapshot.value as? [String:String]
-                {
-                    
-                    let obj = Users()
-                    obj.id = Snapshot.key
-                    obj.setValuesForKeys(dictionary)
-                    self.userArray.append(obj)
-                    
-                    DispatchQueue.main.async
-                    {
-                      self.table.reloadData()
-                    }
-                }
-                
-        }, withCancel: nil)
-      }
-    }
-
-    // MARK: - Table view data source
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return userArray.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        
-        //this line is going to use the cells instead of creating them so
-        let cell = tableView.dequeueReusableCell(withIdentifier:"CustomCellOne",for: indexPath)
-        
-        if let myCell = cell as? TableViewCell
-        {
-         
-            let users = userArray[indexPath.row]
-            myCell.username?.text = users.name
-            myCell.useremail?.text = users.email
-            
-            if let imageurl = users.profileImageUrl
-            {
-                myCell.userimage.layer.cornerRadius = myCell.userimage.frame.size.width / 2;
-                myCell.userimage.clipsToBounds = true;
-                myCell.userimage.downloadImageswithUrl(urlString:imageurl)
-            }
-            
-        }
-
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        
-        selectedLabel = self.userArray[indexPath.row]
-        performSegue(withIdentifier:"Messages1", sender:self)
+        presenter?.getContacts()
     }
     
     // MARK: - Navigation
@@ -103,3 +39,77 @@ class UsersTableViewController: UIViewController,UITableViewDataSource,UITableVi
         }
     }
 }
+
+extension UsersTableViewController:UITableViewDataSource
+{
+
+    // MARK: - Table view data source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return userArray.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        
+        //this line is going to use the cells instead of creating them so
+        let cell = tableView.dequeueReusableCell(withIdentifier:"CustomCellOne",for: indexPath)
+        
+        if let myCell = cell as? TableViewCell
+        {
+            
+            let users = userArray[indexPath.row]
+            myCell.username?.text = users.name
+            myCell.useremail?.text = users.email
+            
+            if let imageurl = users.profileImageUrl
+            {
+                myCell.userimage.layer.cornerRadius = myCell.userimage.frame.size.width / 2;
+                myCell.userimage.clipsToBounds = true;
+                myCell.userimage.downloadImageswithUrl(urlString:imageurl)
+            }
+            
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        
+        selectedLabel = self.userArray[indexPath.row]
+        performSegue(withIdentifier:"Messages1", sender:self)
+    }
+}
+
+
+extension UsersTableViewController:UITableViewDelegate
+{
+    
+    
+}
+
+
+extension UsersTableViewController:ViewDelegate
+{
+    
+    func setContacts(userarray:[Users])
+    {
+       userArray = userarray
+       self.table.reloadData()
+    }
+    
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+

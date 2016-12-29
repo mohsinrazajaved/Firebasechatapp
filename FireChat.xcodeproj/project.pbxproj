@@ -10,6 +10,8 @@
 		09FCB3D0D9BAF563AB4A740F /* Pods_FireChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E3D479FEF905830F6000CD /* Pods_FireChatTests.framework */; };
 		19CD6A386F3D319F3F6731DB /* Pods_FireChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B85FBEFD36FB4DDB8405FF6 /* Pods_FireChatUITests.framework */; };
 		1F0070651E153F4D00FF98E5 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0070641E153F4D00FF98E5 /* CustomViewController.swift */; };
+		1F0070671E15465900FF98E5 /* UsersTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0070661E15465900FF98E5 /* UsersTablePresenter.swift */; };
+		1F0070691E1546B700FF98E5 /* FireDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0070681E1546B700FF98E5 /* FireDatabase.swift */; };
 		1F7A79931DF1E38300623751 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A79921DF1E38300623751 /* Extensions.swift */; };
 		1F8B72D91E0723D300C231BC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B72D81E0723D300C231BC /* ChatViewController.swift */; };
 		1F921D651DEDC61700712483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D641DEDC61700712483 /* AppDelegate.swift */; };
@@ -21,7 +23,7 @@
 		1F921D981DEDC6D500712483 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F921D971DEDC6D500712483 /* My.storyboard */; };
 		1F921D9F1DEDC6E300712483 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D991DEDC6E300712483 /* LoginViewController.swift */; };
 		1F921DA01DEDC6E300712483 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D9A1DEDC6E300712483 /* SignupViewController.swift */; };
-		1F921DA11DEDC6E300712483 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D9B1DEDC6E300712483 /* PasswordViewController.swift */; };
+		1F921DA11DEDC6E300712483 /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D9B1DEDC6E300712483 /* ResetViewController.swift */; };
 		1F921DA21DEDC6E300712483 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D9C1DEDC6E300712483 /* PageViewController.swift */; };
 		1F921DA31DEDC6E300712483 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D9D1DEDC6E300712483 /* WalkthroughViewController.swift */; };
 		1F921DAB1DEDC6EE00712483 /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F921DA61DEDC6EE00712483 /* Karla-Bold.ttf */; };
@@ -68,6 +70,8 @@
 		03E3D479FEF905830F6000CD /* Pods_FireChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D459B76C6AB101CD641349 /* Pods-FireChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FireChatUITests/Pods-FireChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F0070641E153F4D00FF98E5 /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		1F0070661E15465900FF98E5 /* UsersTablePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTablePresenter.swift; sourceTree = "<group>"; };
+		1F0070681E1546B700FF98E5 /* FireDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireDatabase.swift; sourceTree = "<group>"; };
 		1F7A79921DF1E38300623751 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1F8B72D81E0723D300C231BC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		1F921D611DEDC61700712483 /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +89,7 @@
 		1F921D971DEDC6D500712483 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
 		1F921D991DEDC6E300712483 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1F921D9A1DEDC6E300712483 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		1F921D9B1DEDC6E300712483 /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		1F921D9B1DEDC6E300712483 /* ResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
 		1F921D9C1DEDC6E300712483 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		1F921D9D1DEDC6E300712483 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		1F921DA61DEDC6EE00712483 /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Bold.ttf"; sourceTree = "<group>"; };
@@ -215,15 +219,15 @@
 			children = (
 				1F921D991DEDC6E300712483 /* LoginViewController.swift */,
 				1F921D9A1DEDC6E300712483 /* SignupViewController.swift */,
-				1F921D9B1DEDC6E300712483 /* PasswordViewController.swift */,
+				1F921D9B1DEDC6E300712483 /* ResetViewController.swift */,
 				1F921D9C1DEDC6E300712483 /* PageViewController.swift */,
 				1F921D9D1DEDC6E300712483 /* WalkthroughViewController.swift */,
+				1F0070641E153F4D00FF98E5 /* CustomViewController.swift */,
 				1FA538F21E05A3DF00D0277C /* UsersTableViewController.swift */,
 				1F8B72D81E0723D300C231BC /* ChatViewController.swift */,
 				1FAA79DA1E082C490067F217 /* RecentMessagesViewController.swift */,
 				1FAA79DE1E082FDD0067F217 /* TableViewCell.swift */,
 				1FA62D1B1E087A6300590F64 /* ChatViewCell.swift */,
-				1F0070641E153F4D00FF98E5 /* CustomViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -259,6 +263,7 @@
 				1FA538F41E05AD4D00D0277C /* Users.swift */,
 				1FAA79DC1E082CD80067F217 /* Message.swift */,
 				1FE6B7A71E1151FE00062F97 /* FireAuthentication.swift */,
+				1F0070681E1546B700FF98E5 /* FireDatabase.swift */,
 			);
 			name = Modals;
 			sourceTree = "<group>";
@@ -276,9 +281,10 @@
 		1FE6B7A91E11535600062F97 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1FE6B7AA1E1153F700062F97 /* ResetPresenter.swift */,
-				1FE6B7AE1E1165FF00062F97 /* SignupPresenter.swift */,
 				1FE6B7AC1E1165EE00062F97 /* LoginPresenter.swift */,
+				1FE6B7AE1E1165FF00062F97 /* SignupPresenter.swift */,
+				1FE6B7AA1E1153F700062F97 /* ResetPresenter.swift */,
+				1F0070661E15465900FF98E5 /* UsersTablePresenter.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -609,8 +615,9 @@
 				1F921DA31DEDC6E300712483 /* WalkthroughViewController.swift in Sources */,
 				1FA62D1C1E087A6300590F64 /* ChatViewCell.swift in Sources */,
 				1FE6B7AD1E1165EE00062F97 /* LoginPresenter.swift in Sources */,
+				1F0070671E15465900FF98E5 /* UsersTablePresenter.swift in Sources */,
 				1FA538F31E05A3DF00D0277C /* UsersTableViewController.swift in Sources */,
-				1F921DA11DEDC6E300712483 /* PasswordViewController.swift in Sources */,
+				1F921DA11DEDC6E300712483 /* ResetViewController.swift in Sources */,
 				1F921D6D1DEDC61700712483 /* FireChat.xcdatamodeld in Sources */,
 				1FD6E7AD1E03F52300165F6B /* MBProgressHUD.m in Sources */,
 				1F921DA21DEDC6E300712483 /* PageViewController.swift in Sources */,
@@ -618,6 +625,7 @@
 				1FE6B7A81E1151FE00062F97 /* FireAuthentication.swift in Sources */,
 				1FA260851DEF0F6200244595 /* FireService.swift in Sources */,
 				1FE6B7AF1E1165FF00062F97 /* SignupPresenter.swift in Sources */,
+				1F0070691E1546B700FF98E5 /* FireDatabase.swift in Sources */,
 				1FA538F51E05AD4D00D0277C /* Users.swift in Sources */,
 				1FAA79DB1E082C490067F217 /* RecentMessagesViewController.swift in Sources */,
 				1F921DA01DEDC6E300712483 /* SignupViewController.swift in Sources */,

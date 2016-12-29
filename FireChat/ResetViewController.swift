@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class PasswordViewController: UIViewController
+class ResetViewController: UIViewController
 {
     
     @IBOutlet weak var Email: UITextField!
@@ -36,7 +36,7 @@ class PasswordViewController: UIViewController
 }
 
 //code seperation
-extension PasswordViewController:ViewDelegate
+extension ResetViewController:ViewDelegate
 {
     func myerror(_ title:String,_ message:String)
     {
@@ -50,7 +50,7 @@ extension PasswordViewController:ViewDelegate
 }
 
 //code seperation
-extension PasswordViewController:UITextFieldDelegate
+extension ResetViewController:UITextFieldDelegate
 {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool

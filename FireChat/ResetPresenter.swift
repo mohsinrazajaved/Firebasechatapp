@@ -12,11 +12,11 @@ class ResetPresenter
 {
  
   weak var delegate:ViewDelegate?
-  private var FireAuth_Api = FireAuthenticaton()
+  private let FireAuth_Api = FireAuthenticaton()
     
     func setReset(_ userEmail:String?)
     {
-        if userEmail! != ""
+        if userEmail != ""
         {
             FireAuth_Api.resetRequest(userEmail!)
             {[weak weakself = self](msg: Bool) in
@@ -35,6 +35,7 @@ class ResetPresenter
                 }
             }
         }
+            
         else
         {
             delegate?.indicator?()
