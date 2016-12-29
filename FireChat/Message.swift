@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Firebase
+
 class Message:NSObject
 {
 
@@ -14,4 +16,11 @@ class Message:NSObject
     var text:String?
     var timestamp:String?
     var toid:String?
+    
+    //computed property
+    var chatPartenerId:String?
+    {
+      return fromid == FIRAuth.auth()?.currentUser?.uid ? toid:fromid
+    }
+    
 }

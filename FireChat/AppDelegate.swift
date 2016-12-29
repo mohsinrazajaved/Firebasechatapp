@@ -19,6 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        
+//        window = UIWindow(frame:UIScreen.main.bounds)
+//        window?.makeKeyAndVisible()
+//        window?.rootViewController = CustomViewController()
+        
+        if FIRAuth.auth()?.currentUser?.uid != nil
+        {
+            let home = RecentMessagesViewController()
+            let mainStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
+            let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Home") as UIViewController
+            home.present(vc, animated: true, completion: nil)
+        }
+
         return true
     }
 

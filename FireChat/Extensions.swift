@@ -83,10 +83,10 @@ extension UIImageView
         
         if let cachedImages = imageCache.object(forKey:urlString as NSString)
         {
-            
+            self.layer.cornerRadius = self.frame.size.width / 2;
+            self.clipsToBounds = true;
             self.image = cachedImages
             return
-            
         }
         
         
@@ -125,8 +125,4 @@ extension UIImageView
     }
 
 }
-
-
-
-
 

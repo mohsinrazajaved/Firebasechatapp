@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		09FCB3D0D9BAF563AB4A740F /* Pods_FireChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E3D479FEF905830F6000CD /* Pods_FireChatTests.framework */; };
 		19CD6A386F3D319F3F6731DB /* Pods_FireChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B85FBEFD36FB4DDB8405FF6 /* Pods_FireChatUITests.framework */; };
+		1F0070651E153F4D00FF98E5 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0070641E153F4D00FF98E5 /* CustomViewController.swift */; };
 		1F7A79931DF1E38300623751 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A79921DF1E38300623751 /* Extensions.swift */; };
 		1F8B72D91E0723D300C231BC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B72D81E0723D300C231BC /* ChatViewController.swift */; };
 		1F921D651DEDC61700712483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D641DEDC61700712483 /* AppDelegate.swift */; };
@@ -37,6 +38,11 @@
 		1FAA79E01E082FDD0067F217 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAA79DE1E082FDD0067F217 /* TableViewCell.swift */; };
 		1FD6E7AD1E03F52300165F6B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6E7AC1E03F52300165F6B /* MBProgressHUD.m */; };
 		1FD6FEFF1DFDECEF00878166 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FD6FEFE1DFDECEF00878166 /* GoogleService-Info.plist */; };
+		1FE6B7A81E1151FE00062F97 /* FireAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6B7A71E1151FE00062F97 /* FireAuthentication.swift */; };
+		1FE6B7AB1E1153F700062F97 /* ResetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6B7AA1E1153F700062F97 /* ResetPresenter.swift */; };
+		1FE6B7AD1E1165EE00062F97 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6B7AC1E1165EE00062F97 /* LoginPresenter.swift */; };
+		1FE6B7AF1E1165FF00062F97 /* SignupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6B7AE1E1165FF00062F97 /* SignupPresenter.swift */; };
+		1FE6B7B11E11B84C00062F97 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6B7B01E11B84C00062F97 /* Protocol.swift */; };
 		46D71631DAE56BD524C5ED65 /* Pods_FireChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6555CD0685A68CDD0BE9A839 /* Pods_FireChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +67,7 @@
 		00DF2B9E49C75B003C596A9A /* Pods-FireChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FireChatTests/Pods-FireChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		03E3D479FEF905830F6000CD /* Pods_FireChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D459B76C6AB101CD641349 /* Pods-FireChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FireChatUITests/Pods-FireChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1F0070641E153F4D00FF98E5 /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		1F7A79921DF1E38300623751 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1F8B72D81E0723D300C231BC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		1F921D611DEDC61700712483 /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +104,11 @@
 		1FD6E7AB1E03F52300165F6B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		1FD6E7AC1E03F52300165F6B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		1FD6FEFE1DFDECEF00878166 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1FE6B7A71E1151FE00062F97 /* FireAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireAuthentication.swift; sourceTree = "<group>"; };
+		1FE6B7AA1E1153F700062F97 /* ResetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPresenter.swift; sourceTree = "<group>"; };
+		1FE6B7AC1E1165EE00062F97 /* LoginPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		1FE6B7AE1E1165FF00062F97 /* SignupPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
+		1FE6B7B01E11B84C00062F97 /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		238F03D8A7E8512FF0BAA761 /* Pods-FireChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FireChatUITests/Pods-FireChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		39C7D38A147A1279FF0CC976 /* Pods-FireChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FireChat/Pods-FireChat.debug.xcconfig"; sourceTree = "<group>"; };
 		4B85FBEFD36FB4DDB8405FF6 /* Pods_FireChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,10 +170,12 @@
 		1F921D631DEDC61700712483 /* FireChat */ = {
 			isa = PBXGroup;
 			children = (
+				1FE6B7A91E11535600062F97 /* Controllers */,
 				1FA260821DEF0C3A00244595 /* Supporting files */,
-				1FA260811DEF0C1400244595 /* Controllers */,
-				1FA260831DEF0C6800244595 /* Views */,
+				1FA260811DEF0C1400244595 /* Views */,
+				1FA260831DEF0C6800244595 /* Storyboard */,
 				1FA260861DEF0F9C00244595 /* Modals */,
+				1FE6B7B21E11B85D00062F97 /* Protocol */,
 			);
 			path = FireChat;
 			sourceTree = "<group>";
@@ -196,7 +210,7 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
-		1FA260811DEF0C1400244595 /* Controllers */ = {
+		1FA260811DEF0C1400244595 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				1F921D991DEDC6E300712483 /* LoginViewController.swift */,
@@ -209,8 +223,9 @@
 				1FAA79DA1E082C490067F217 /* RecentMessagesViewController.swift */,
 				1FAA79DE1E082FDD0067F217 /* TableViewCell.swift */,
 				1FA62D1B1E087A6300590F64 /* ChatViewCell.swift */,
+				1F0070641E153F4D00FF98E5 /* CustomViewController.swift */,
 			);
-			name = Controllers;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		1FA260821DEF0C3A00244595 /* Supporting files */ = {
@@ -228,12 +243,12 @@
 			name = "Supporting files";
 			sourceTree = "<group>";
 		};
-		1FA260831DEF0C6800244595 /* Views */ = {
+		1FA260831DEF0C6800244595 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
 				1F921D971DEDC6D500712483 /* My.storyboard */,
 			);
-			name = Views;
+			name = Storyboard;
 			sourceTree = "<group>";
 		};
 		1FA260861DEF0F9C00244595 /* Modals */ = {
@@ -243,6 +258,7 @@
 				1F7A79921DF1E38300623751 /* Extensions.swift */,
 				1FA538F41E05AD4D00D0277C /* Users.swift */,
 				1FAA79DC1E082CD80067F217 /* Message.swift */,
+				1FE6B7A71E1151FE00062F97 /* FireAuthentication.swift */,
 			);
 			name = Modals;
 			sourceTree = "<group>";
@@ -255,6 +271,24 @@
 				1FD6E7AC1E03F52300165F6B /* MBProgressHUD.m */,
 			);
 			name = MPProgressHUD;
+			sourceTree = "<group>";
+		};
+		1FE6B7A91E11535600062F97 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1FE6B7AA1E1153F700062F97 /* ResetPresenter.swift */,
+				1FE6B7AE1E1165FF00062F97 /* SignupPresenter.swift */,
+				1FE6B7AC1E1165EE00062F97 /* LoginPresenter.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1FE6B7B21E11B85D00062F97 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				1FE6B7B01E11B84C00062F97 /* Protocol.swift */,
+			);
+			name = Protocol;
 			sourceTree = "<group>";
 		};
 		8CB8F96513AE9FC56FE47C5F /* Frameworks */ = {
@@ -571,19 +605,25 @@
 			files = (
 				1F921D9F1DEDC6E300712483 /* LoginViewController.swift in Sources */,
 				1FAA79E01E082FDD0067F217 /* TableViewCell.swift in Sources */,
+				1F0070651E153F4D00FF98E5 /* CustomViewController.swift in Sources */,
 				1F921DA31DEDC6E300712483 /* WalkthroughViewController.swift in Sources */,
 				1FA62D1C1E087A6300590F64 /* ChatViewCell.swift in Sources */,
+				1FE6B7AD1E1165EE00062F97 /* LoginPresenter.swift in Sources */,
 				1FA538F31E05A3DF00D0277C /* UsersTableViewController.swift in Sources */,
 				1F921DA11DEDC6E300712483 /* PasswordViewController.swift in Sources */,
 				1F921D6D1DEDC61700712483 /* FireChat.xcdatamodeld in Sources */,
 				1FD6E7AD1E03F52300165F6B /* MBProgressHUD.m in Sources */,
 				1F921DA21DEDC6E300712483 /* PageViewController.swift in Sources */,
 				1F7A79931DF1E38300623751 /* Extensions.swift in Sources */,
+				1FE6B7A81E1151FE00062F97 /* FireAuthentication.swift in Sources */,
 				1FA260851DEF0F6200244595 /* FireService.swift in Sources */,
+				1FE6B7AF1E1165FF00062F97 /* SignupPresenter.swift in Sources */,
 				1FA538F51E05AD4D00D0277C /* Users.swift in Sources */,
 				1FAA79DB1E082C490067F217 /* RecentMessagesViewController.swift in Sources */,
 				1F921DA01DEDC6E300712483 /* SignupViewController.swift in Sources */,
+				1FE6B7B11E11B84C00062F97 /* Protocol.swift in Sources */,
 				1FAA79DD1E082CD80067F217 /* Message.swift in Sources */,
+				1FE6B7AB1E1153F700062F97 /* ResetPresenter.swift in Sources */,
 				1F921D651DEDC61700712483 /* AppDelegate.swift in Sources */,
 				1F8B72D91E0723D300C231BC /* ChatViewController.swift in Sources */,
 			);

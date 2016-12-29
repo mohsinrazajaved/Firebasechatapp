@@ -11,13 +11,10 @@ import Firebase
 
 class ChatViewController:UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 {
-    @IBOutlet weak var chatuiimage: UIImageView!
     @IBOutlet weak var messageBox: UITextField!
     @IBOutlet weak var navTitle: UINavigationItem!
     var userid:String?
     var bartitle:String?
-    var imgurl:String?
-    
     
     var chatUserName:AnyObject?
     {
@@ -27,7 +24,6 @@ class ChatViewController:UIViewController,UICollectionViewDataSource, UICollecti
             {
                 bartitle = object1.name
                 userid = object1.id
-                imgurl = object1.profileImageUrl
             }
         }
     }
@@ -40,15 +36,7 @@ class ChatViewController:UIViewController,UICollectionViewDataSource, UICollecti
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        chatuiimage.layer.cornerRadius = chatuiimage.frame.size.width / 2;
-        chatuiimage.clipsToBounds = true;
-        chatuiimage.layer.borderWidth = 1
         self.navTitle.title = bartitle
-
-        if imgurl != nil
-        {
-          chatuiimage.downloadImageswithUrl(urlString:imgurl!)
-        }
     
     // Register cell classes
     self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "msg")
@@ -110,6 +98,14 @@ class ChatViewController:UIViewController,UICollectionViewDataSource, UICollecti
 
         }
         
+    }
+    
+    
+    @IBAction func backToChat(_ sender: UIBarButtonItem)
+    {
+        let mainStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
+        let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Home") as UIViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
 }

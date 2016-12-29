@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import FireChat
+@testable import Pods_FireChat
 
 class FireChatTests: XCTestCase {
     

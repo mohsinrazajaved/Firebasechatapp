@@ -8,39 +8,33 @@
 
 import UIKit
 import QuartzCore
-import Firebase
 
-class LoginViewController:UIViewController,UITextFieldDelegate
+
+class LoginViewController:UIViewController
 {
 
     @IBOutlet weak var Email: UITextField!
     @IBOutlet weak var Password: UITextField!
     let alert = UIAlertController()
-
+    private var presenter:LoginPresenter?
     
+       
     override func viewDidLoad()
     {
         super.viewDidLoad()
         Email.delegate = self
         Password.delegate = self
+        presenter = LoginPresenter()
+        presenter?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
+        //presenter?.check()
+       
     }
     
-    override var preferredStatusBarStyle : UIStatusBarStyle
+    override func viewWillAppear(_ animated: Bool)
     {
-        return .lightContent
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
+        self.navigationController?.isNavigationBarHidden = true
        //self.displayWalkthroughs()
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        Email.resignFirstResponder()
-        Password.resignFirstResponder()
-        return true;
     }
 
     
@@ -50,42 +44,53 @@ class LoginViewController:UIViewController,UITextFieldDelegate
         loadingNotification.mode = MBProgressHUDMode.indeterminate
         loadingNotification.label.text = "Loading"
 
-      guard let email = Email.text,let password = Password.text else
-      {
-          alert.create(title: "Oops!",message: "Try again.")
-          MBProgressHUD.hide(for: self.view, animated: true)
+        presenter?.setLogin(Email.text,Password.text)
+    }
 
-          return
-      }
-        
-        FIRAuth.auth()?.signIn(withEmail: email, password:password)
-        {[weak weakself = self](user:FIRUser?,error) in
-                
-                if error != nil
-                {
-                    
-                 weakself?.alert.create(title: "Oops!", message: "Having some trouble sigin your account. Try again.")
-                    MBProgressHUD.hide(for: self.view, animated: true)
+}
 
-                 return
-                
-                }
-            
-            MBProgressHUD.hide(for: self.view, animated: true)
-            let mainStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
-            let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Home") as UIViewController
-            self.present(vc, animated: true, completion: nil)
-        }
-        
+//code seperation
+extension LoginViewController:ViewDelegate
+{
+    func myerror(_ title:String,_ message:String)
+    {
+        alert.create(title:title, message: message)
     }
     
+    func indicator()
+    {
+        MBProgressHUD.hide(for: self.view, animated: true)
+    }
     
+    func loginIndicator()
+    {
+        //this method is called by the presenter to update the view
+        MBProgressHUD.hide(for: self.view, animated: true)
+        let mainStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
+        let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Home") as UIViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+}
+
+
+//code seperation
+extension LoginViewController:UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        Email.resignFirstResponder()
+        Password.resignFirstResponder()
+        return true;
+    }
+}
+
+
 //  private func displayWalkthroughs()
 //    {
-//        
+//
 //          let userDefaults = UserDefaults.standard
 ////        let displayedWalkthrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
-////        
+////
 ////        if !displayedWalkthrough
 ////        {
 ////            if let pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") as? PageViewController
@@ -94,7 +99,4 @@ class LoginViewController:UIViewController,UITextFieldDelegate
 ////            }
 ////        }
 //    }
-
-
-}
 

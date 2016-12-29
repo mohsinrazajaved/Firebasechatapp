@@ -8,54 +8,65 @@
 
 import UIKit
 import QuartzCore
-import Firebase
 
-class PasswordViewController: UIViewController,UITextFieldDelegate
+class PasswordViewController: UIViewController
 {
     
     @IBOutlet weak var Email: UITextField!
     let alert = UIAlertController()
-    
+    private var presenter:ResetPresenter?
     
     override func viewDidLoad()
     {
-        
          Email.delegate = self
+         presenter = ResetPresenter()
+         presenter?.delegate = self
+        
          self.navigationController?.isNavigationBarHidden = false
-
     }
     
+   @IBAction func Resetpassword(_ sender: UIButton)
+    {
+        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingNotification.mode = MBProgressHUDMode.indeterminate
+        loadingNotification.label.text = "Checking"
+        presenter?.setReset(Email.text)
+    }
+    
+}
+
+//code seperation
+extension PasswordViewController:ViewDelegate
+{
+    func myerror(_ title:String,_ message:String)
+    {
+        alert.create(title:title, message: message)
+    }
+    
+    func indicator()
+    {
+        MBProgressHUD.hide(for: self.view, animated: true)
+    }
+}
+
+//code seperation
+extension PasswordViewController:UITextFieldDelegate
+{
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         Email.resignFirstResponder()
         return true;
     }
 
-
-   @IBAction func Resetpassword(_ sender: UIButton)
-    {
-      
-        guard let email = Email.text else
-        {
-            alert.create(title: "Oops!", message: "Having some trouble resetting your password. Try again.")
-            return
-        }
-
-        FIRAuth.auth()?.sendPasswordReset(withEmail: email)
-        {[weak weakself = self](error) in
-            
-            if(error != nil)
-            {
-              weakself?.alert.create(title: "Oops!", message: "Having some trouble. Try again.")
-            }
-            else
-            {
-              weakself?.alert.create(title: "Done", message: "Verification email is send to you!!!.")
-            }
-        }
-    }
-    
 }
+
+
+
+
+
+
+
 
 
 

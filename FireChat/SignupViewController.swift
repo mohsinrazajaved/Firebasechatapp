@@ -8,9 +8,9 @@
 
 import UIKit
 import QuartzCore
-import Firebase
 
-class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+
+class SignupViewController: UIViewController,UINavigationControllerDelegate
 {
     
     @IBOutlet weak var Profilepic: UIImageView!
@@ -22,27 +22,21 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
     let imagePicker = UIImagePickerController()
     let alert  = UIAlertController()
     let obj = Users()
+    private var presenter:SignupPresenter?
     
     
     override func viewDidLoad()
     {
+        
           Username.delegate = self
           Password.delegate = self
           imagePicker.delegate = self
           Email.delegate = self
+          presenter = SignupPresenter()
+          presenter?.delegate = self
           Profilepic.layer.cornerRadius = self.Profilepic.frame.size.width / 2;
           Profilepic.clipsToBounds = true;
-          Profilepic.image = UIImage(named: "user")
           self.navigationController?.isNavigationBarHidden = false
-
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        Username.resignFirstResponder()
-        Email.resignFirstResponder()
-        Password.resignFirstResponder()
-        return true;
     }
     
     
@@ -59,98 +53,9 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
         let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate
         loadingNotification.label.text = "Loading"
-        
-        guard let myemail = Email.text ,let mypassword = Password.text,let myname = Username.text else
-        {
-            alert.create(title: "Oops!",message: "Try again.")
-            MBProgressHUD.hide(for: self.view, animated: true)
-
-            return
-        }
-        
-        FIRAuth.auth()?.createUser(withEmail: myemail,password: mypassword)
-            {(user,error) in
-                
-                if(error != nil)
-                {
-                    
-                  self.alert.create(title: "Oops!", message: "Having some trouble creating your account. Try again.")
-                    MBProgressHUD.hide(for: self.view, animated: true)
-
-                  return
-                }
-                
-                guard let uid = user?.uid else
-                {
-                    MBProgressHUD.hide(for: self.view, animated: true)
-                    return
-                }
-            
-                self.obj.name = myname
-                self.obj.email = myemail
-                self.storeInfoInStorage(uid,self.obj)
-            }
-    }
-    
-    
-    private func storeInfoInStorage(_ uid_user:String,_ info:Users)
-    {
-        //unique uid for each image
-        let imageName = UUID().uuidString
-        let storageRef = FireService.fireservice.STORAGE_IMAGES.child("\(imageName).jpg")
-
-        guard let pngImg = self.Profilepic.image else
-        {
-            MBProgressHUD.hide(for: self.view, animated: true)
-            return
-        }
-        
-        if let uploadData = UIImageJPEGRepresentation(pngImg,0.1)
-        {
-            storageRef.put(uploadData, metadata: nil)
-            {(metadata, error) in
-               
-                if error != nil
-                {
-                   self.alert.create(title: "Oops!", message: "Having some trouble storing your data. Try again.")
-                    MBProgressHUD.hide(for: self.view, animated: true)
-
-                   return
-                }
-
-                if let profileImageUrl = metadata?.downloadURL()?.absoluteString
-                {
-                    
-                    let values = ["name":info.name!, "email":info.email!, "profileImageUrl": profileImageUrl] as [String:String]
-                    self.registerUserIntoDatabaseWithUID(uid_user,values)
-                }
-            }
-        }
-    }
-        
-    private func registerUserIntoDatabaseWithUID(_ uid: String,_ values: [String:String])
-    {
-        
-        let usersReference = FireService.fireservice.BASE_REF.child("users").child(uid)
-        usersReference.updateChildValues(values)
-        {[weak weakself = self](error, ref) in
-            
-            if error != nil
-            {
-                
-               weakself?.alert.create(title: "Oops!", message: "Having some trouble in database Try again.")
-                MBProgressHUD.hide(for: self.view, animated: true)
-
-               return
-            }
-           
-            MBProgressHUD.hide(for: self.view, animated: true)
-        }
+        isImageNil()
         
     }
-    
-    
-    // MARK: - UIImagePickerControllerDelegate Methods + custom
     
     func imagepicker()
     {
@@ -159,11 +64,64 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
         present(imagePicker, animated: true, completion: nil)
     }
     
+    func isImageNil()
+    {
+        if let pngImg = self.Profilepic.image
+        {
+            if let uploadData = UIImageJPEGRepresentation(pngImg,0.1)
+            {
+              presenter?.setSignup(uploadData,Email.text, Password.text, Username.text)
+            }
+        }
+            
+        else
+        {
+            MBProgressHUD.hide(for: self.view, animated: true)
+            print("error")
+        }
+    }
+}
+
+
+//code seperation
+extension SignupViewController:ViewDelegate
+{
+    func myerror(_ title:String,_ message:String)
+    {
+        alert.create(title:title, message: message)
+    }
+    
+    func indicator()
+    {
+        MBProgressHUD.hide(for: self.view, animated: true)
+    }
+}
+
+
+//code seperation
+extension SignupViewController:UITextFieldDelegate
+{
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        Username.resignFirstResponder()
+        Email.resignFirstResponder()
+        Password.resignFirstResponder()
+        return true;
+    }
+}
+
+
+//code seperation
+extension SignupViewController:UIImagePickerControllerDelegate
+{
+    // MARK: - UIImagePickerControllerDelegate Methods + custom
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
-             self.Profilepic.image = pickedImage
+            self.Profilepic.image = pickedImage
         }
         
         dismiss(animated: true, completion: nil)
@@ -173,6 +131,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
     {
         dismiss(animated: true, completion: nil)
     }
-    
-    
 }
+
+
+

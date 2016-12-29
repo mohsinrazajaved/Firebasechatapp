@@ -27,12 +27,12 @@ class UsersTableViewController: UIViewController,UITableViewDataSource,UITableVi
     private func observeContacts()
     {
     
-       // if FIRAuth.auth()?.currentUser?.uid == nil
-        //        {
+     if FIRAuth.auth()?.currentUser?.uid != nil
+     {
         let usersReference = FireService.fireservice.BASE_REF.child("users")
         
         usersReference.observe(.childAdded, with:
-            {(Snapshot) in
+        {(Snapshot) in
                 
                 if let dictionary =  Snapshot.value as? [String:String]
                 {
@@ -49,7 +49,7 @@ class UsersTableViewController: UIViewController,UITableViewDataSource,UITableVi
                 }
                 
         }, withCancel: nil)
-        //}
+      }
     }
 
     // MARK: - Table view data source

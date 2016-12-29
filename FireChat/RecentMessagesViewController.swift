@@ -11,6 +11,8 @@ import Firebase
 class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 {
 
+    @IBOutlet weak var loginUserImage: UIImageView!
+    @IBOutlet weak var loginUserTitle: UILabel!
     var chatuserArray = [Users]()
     var messageArray = [Message]()
     var messageDictionary = [String:Message]()
@@ -24,12 +26,33 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
-        chatuserArray.removeAll()
-        messageArray.removeAll()
-        messageDictionary.removeAll()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        self.observeUser()
         self.observeMsg()
     }
     
+    private func observeUser()
+    {
+        if let id = FIRAuth.auth()?.currentUser?.uid{
+    
+       let usersReference = FireService.fireservice.BASE_REF.child("users").child(id)
+            usersReference.observeSingleEvent(of:.value, with:
+            {(Snapshot) in
+                
+                if let dict =  Snapshot.value as? [String:String]
+                {
+                    
+                    self.loginUserTitle?.text = dict["name"]
+                    self.loginUserImage.downloadImageswithUrl(urlString: dict["profileImageUrl"]!)
+                    
+                }
+            })
+        }
+    }
     private func observeMsg()
     {
         if let uid = FIRAuth.auth()?.currentUser?.uid
@@ -91,7 +114,7 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
         if let myCell = cell as? ChatViewCell
         {
              let mesg = messageArray[indexPath.row]
-             myCell.userdata(msg: mesg)
+             myCell.msg = mesg
         }
         
         return cell
@@ -100,7 +123,14 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
-        //selectedLabel = self.chatuserArray[indexPath.row]
+        let selectedMsg = self.chatuserArray[indexPath.row]
+        
+//        guard let chatid = selectedMsg.chatPartenerId else
+//        {
+//            return
+//        }
+        
+
         performSegue(withIdentifier:"Messages2", sender:self)
     }
     
@@ -111,10 +141,10 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
         
         if segue.identifier != nil
         {
-            if let destinationvc = segue.destination as? ChatViewController
-            {
-              //destinationvc.chatUserName = selectedLabel
-            }
+//            if let destinationvc = segue.destination as? ChatViewController
+//            {
+//              //destinationvc.chatUserName = selectedLabel
+//            }
         }
         
     }
@@ -124,6 +154,9 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
         do
         {
             try FIRAuth.auth()?.signOut()
+            chatuserArray.removeAll()
+            messageArray.removeAll()
+            messageDictionary.removeAll()
             let mainStoryboard = UIStoryboard(name: "My", bundle: Bundle.main)
             let vc : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Login") as UIViewController
             self.present(vc, animated: true, completion: nil)
@@ -132,7 +165,7 @@ class RecentMessagesViewController: UIViewController,UITableViewDelegate,UITable
         
         catch
         {
-          print("error")
+          print("Exception error")
         }
         
     }
