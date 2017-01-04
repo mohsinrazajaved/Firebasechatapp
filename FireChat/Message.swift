@@ -9,13 +9,22 @@
 import Foundation
 import Firebase
 
-class Message:NSObject
+struct Message
 {
 
     var fromid:String?
     var text:String?
     var timestamp:String?
     var toid:String?
+    
+    init(_ fromid:String?,_ text:String?,_ timestamp:String?,_ toid:String?)
+    {
+        
+        self.fromid = fromid
+        self.text = text
+        self.timestamp = timestamp
+        self.toid = toid
+    }
     
     //computed property
     var chatPartenerId:String?

@@ -11,7 +11,7 @@
 		19CD6A386F3D319F3F6731DB /* Pods_FireChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B85FBEFD36FB4DDB8405FF6 /* Pods_FireChatUITests.framework */; };
 		1F0070651E153F4D00FF98E5 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0070641E153F4D00FF98E5 /* CustomViewController.swift */; };
 		1F0070671E15465900FF98E5 /* UsersTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0070661E15465900FF98E5 /* UsersTablePresenter.swift */; };
-		1F0070691E1546B700FF98E5 /* FireDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0070681E1546B700FF98E5 /* FireDatabase.swift */; };
+		1F0070691E1546B700FF98E5 /* FireContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0070681E1546B700FF98E5 /* FireContacts.swift */; };
 		1F7A79931DF1E38300623751 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A79921DF1E38300623751 /* Extensions.swift */; };
 		1F8B72D91E0723D300C231BC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B72D81E0723D300C231BC /* ChatViewController.swift */; };
 		1F921D651DEDC61700712483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F921D641DEDC61700712483 /* AppDelegate.swift */; };
@@ -35,9 +35,12 @@
 		1FA538F31E05A3DF00D0277C /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA538F21E05A3DF00D0277C /* UsersTableViewController.swift */; };
 		1FA538F51E05AD4D00D0277C /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA538F41E05AD4D00D0277C /* Users.swift */; };
 		1FA62D1C1E087A6300590F64 /* ChatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA62D1B1E087A6300590F64 /* ChatViewCell.swift */; };
+		1FA640EC1E165FCC0000B15A /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA640EB1E165FCC0000B15A /* ChatPresenter.swift */; };
+		1FA640EE1E1661100000B15A /* FireMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA640ED1E1661100000B15A /* FireMessages.swift */; };
 		1FAA79DB1E082C490067F217 /* RecentMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAA79DA1E082C490067F217 /* RecentMessagesViewController.swift */; };
 		1FAA79DD1E082CD80067F217 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAA79DC1E082CD80067F217 /* Message.swift */; };
 		1FAA79E01E082FDD0067F217 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAA79DE1E082FDD0067F217 /* TableViewCell.swift */; };
+		1FACED021E15C4920044504B /* RecentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FACED011E15C4920044504B /* RecentPresenter.swift */; };
 		1FD6E7AD1E03F52300165F6B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6E7AC1E03F52300165F6B /* MBProgressHUD.m */; };
 		1FD6FEFF1DFDECEF00878166 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FD6FEFE1DFDECEF00878166 /* GoogleService-Info.plist */; };
 		1FE6B7A81E1151FE00062F97 /* FireAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6B7A71E1151FE00062F97 /* FireAuthentication.swift */; };
@@ -71,7 +74,7 @@
 		18D459B76C6AB101CD641349 /* Pods-FireChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FireChatUITests/Pods-FireChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F0070641E153F4D00FF98E5 /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		1F0070661E15465900FF98E5 /* UsersTablePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTablePresenter.swift; sourceTree = "<group>"; };
-		1F0070681E1546B700FF98E5 /* FireDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireDatabase.swift; sourceTree = "<group>"; };
+		1F0070681E1546B700FF98E5 /* FireContacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireContacts.swift; sourceTree = "<group>"; };
 		1F7A79921DF1E38300623751 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1F8B72D81E0723D300C231BC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		1F921D611DEDC61700712483 /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,9 +104,12 @@
 		1FA538F21E05A3DF00D0277C /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		1FA538F41E05AD4D00D0277C /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		1FA62D1B1E087A6300590F64 /* ChatViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewCell.swift; sourceTree = "<group>"; };
+		1FA640EB1E165FCC0000B15A /* ChatPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
+		1FA640ED1E1661100000B15A /* FireMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireMessages.swift; sourceTree = "<group>"; };
 		1FAA79DA1E082C490067F217 /* RecentMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentMessagesViewController.swift; sourceTree = "<group>"; };
 		1FAA79DC1E082CD80067F217 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1FAA79DE1E082FDD0067F217 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		1FACED011E15C4920044504B /* RecentPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentPresenter.swift; sourceTree = "<group>"; };
 		1FD6E7AA1E03F52200165F6B /* FireChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FireChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		1FD6E7AB1E03F52300165F6B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		1FD6E7AC1E03F52300165F6B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -263,7 +269,8 @@
 				1FA538F41E05AD4D00D0277C /* Users.swift */,
 				1FAA79DC1E082CD80067F217 /* Message.swift */,
 				1FE6B7A71E1151FE00062F97 /* FireAuthentication.swift */,
-				1F0070681E1546B700FF98E5 /* FireDatabase.swift */,
+				1F0070681E1546B700FF98E5 /* FireContacts.swift */,
+				1FA640ED1E1661100000B15A /* FireMessages.swift */,
 			);
 			name = Modals;
 			sourceTree = "<group>";
@@ -285,6 +292,8 @@
 				1FE6B7AE1E1165FF00062F97 /* SignupPresenter.swift */,
 				1FE6B7AA1E1153F700062F97 /* ResetPresenter.swift */,
 				1F0070661E15465900FF98E5 /* UsersTablePresenter.swift */,
+				1FACED011E15C4920044504B /* RecentPresenter.swift */,
+				1FA640EB1E165FCC0000B15A /* ChatPresenter.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -612,6 +621,7 @@
 				1F921D9F1DEDC6E300712483 /* LoginViewController.swift in Sources */,
 				1FAA79E01E082FDD0067F217 /* TableViewCell.swift in Sources */,
 				1F0070651E153F4D00FF98E5 /* CustomViewController.swift in Sources */,
+				1FA640EE1E1661100000B15A /* FireMessages.swift in Sources */,
 				1F921DA31DEDC6E300712483 /* WalkthroughViewController.swift in Sources */,
 				1FA62D1C1E087A6300590F64 /* ChatViewCell.swift in Sources */,
 				1FE6B7AD1E1165EE00062F97 /* LoginPresenter.swift in Sources */,
@@ -624,9 +634,11 @@
 				1F7A79931DF1E38300623751 /* Extensions.swift in Sources */,
 				1FE6B7A81E1151FE00062F97 /* FireAuthentication.swift in Sources */,
 				1FA260851DEF0F6200244595 /* FireService.swift in Sources */,
+				1FACED021E15C4920044504B /* RecentPresenter.swift in Sources */,
 				1FE6B7AF1E1165FF00062F97 /* SignupPresenter.swift in Sources */,
-				1F0070691E1546B700FF98E5 /* FireDatabase.swift in Sources */,
+				1F0070691E1546B700FF98E5 /* FireContacts.swift in Sources */,
 				1FA538F51E05AD4D00D0277C /* Users.swift in Sources */,
+				1FA640EC1E165FCC0000B15A /* ChatPresenter.swift in Sources */,
 				1FAA79DB1E082C490067F217 /* RecentMessagesViewController.swift in Sources */,
 				1F921DA01DEDC6E300712483 /* SignupViewController.swift in Sources */,
 				1FE6B7B11E11B84C00062F97 /* Protocol.swift in Sources */,

@@ -8,48 +8,44 @@
 
 import Foundation
 
-class ResentPresenter
+class RecentPresenter
 {
-    var delegate:ViewDataSource?
-    var datasource:ViewDelegate?
+    var delegate:ViewDelegate?
+    var datasource:ViewDataSource?
     private let fire_contact = FireContacts()
     private let fire_auth = FireAuthenticaton()
     
-    func getRecents()
+    func setRecents()
     {
         
         fire_contact.observeUser()
         {[weak weakself = self](data:[Users]) in
                 
-            weakself?.delegate?.setContacts(data)
+            weakself?.datasource?.getContacts(data)
         }
-        
     }
     
-    func getMessages()
+    func setMessages()
     {
         fire_contact.observeMsg()
         {[weak weakself = self](data:[Message]) in
-            
-            weakself?.delegate?.setContacts(data)
+            weakself?.datasource?.getMessages(data,(weakself?.fire_contact.partners(data))!)
         }
     }
     
-    func getSignOut()
+    func setSignOut()
     {
         fire_auth.logoutRequest()
         {[weak weakself = self](data:Bool) in
             
             if data != true
             {
-                weakself?.datasource?.signOut()
+                weakself?.delegate?.signOut?()
             }
             
             else
             {
-            
-              
-            
+               weakself?.delegate?.myerror?("Oopss","Unable to SignOut")
             }
         }
     }

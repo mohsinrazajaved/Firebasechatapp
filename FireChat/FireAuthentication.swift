@@ -11,13 +11,24 @@ import Firebase
 
 class FireAuthenticaton
 {
-    
-    private let user = Users()
   
+    func logoutRequest(_ completion: @escaping ((_ msg: Bool) -> ()))
+    {
+        do
+        {
+            try FIRAuth.auth()?.signOut()
+            completion(true)
+        }
+            
+        catch
+        {
+           completion(false)
+        }
+    }
+    
     //user passsword reset
     func resetRequest(_ user_email:String,_ completion: @escaping ((_ msg: Bool) -> ()))
     {
-        
         FIRAuth.auth()?.sendPasswordReset(withEmail:user_email)
         {(error) in
             

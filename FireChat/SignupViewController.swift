@@ -21,7 +21,6 @@ class SignupViewController: UIViewController,UINavigationControllerDelegate
    
     let imagePicker = UIImagePickerController()
     let alert  = UIAlertController()
-    let obj = Users()
     private var presenter:SignupPresenter?
     
     

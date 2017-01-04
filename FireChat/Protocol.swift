@@ -13,6 +13,11 @@ import Foundation
     @objc optional func myerror(_ title:String,_ message:String)
     @objc optional func indicator()
     @objc optional func loginIndicator()
-    @objc optional func setContacts(_ userarray:[Users])
-    
+    @objc optional func signOut()
+}
+
+protocol ViewDataSource:class
+{
+    func getContacts(_ userarray:[Users])
+    func getMessages(_ messagearray:[Message],_ chatuserarray:[Users])
 }

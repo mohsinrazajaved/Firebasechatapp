@@ -8,12 +8,34 @@
 
 import Foundation
 
-class ChatPresenterr
+class ChatPresenter
 {
     
     var delegate:ViewDelegate?
     var datasource:ViewDataSource?
-    private let fire_contact = FireContacts()
-
+    private let fire_contact = FireMessages()
     
+    
+    
+    func setChat(_ person:Users?,_ msg:String?)
+    {
+        
+//       if msg != ""  && person.userid != "" ,let fromid = FIRAuth.auth()?.currentUser?.uid  else
+//       {
+//
+//        fire_contact.Messages(msg)
+//        {[weak weakself = self](data:Bool) in
+//            
+//            if data != true
+//            {
+//              // weakself?.datasource?.setContacts(data)
+//            }
+//            
+//            else
+//            {
+//               
+//            }
+//          }
+//       }
+    }
 }

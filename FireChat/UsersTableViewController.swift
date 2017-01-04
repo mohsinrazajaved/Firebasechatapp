@@ -23,7 +23,8 @@ class UsersTableViewController: UIViewController
         presenter?.delegate = self
         table.delegate = self
         table.dataSource = self
-        presenter?.getContacts()
+        presenter?.setContacts()
+        //userArray.removeAll()
     }
     
     // MARK: - Navigation
@@ -34,7 +35,7 @@ class UsersTableViewController: UIViewController
         {
             if let destinationvc = segue.destination as? ChatViewController
             {
-                destinationvc.chatUserName = selectedLabel
+               destinationvc.chatUserName = selectedLabel
             }
         }
     }
@@ -42,7 +43,7 @@ class UsersTableViewController: UIViewController
 
 extension UsersTableViewController:UITableViewDataSource
 {
-
+ 
     // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -85,19 +86,19 @@ extension UsersTableViewController:UITableViewDataSource
 
 extension UsersTableViewController:UITableViewDelegate
 {
-    
-    
+    //some time I used this delegate
 }
 
-
-extension UsersTableViewController:ViewDelegate
+extension UsersTableViewController:ViewDataSource
 {
     
-    func setContacts(userarray:[Users])
+    func getContacts(_ userarray:[Users])
     {
-       userArray = userarray
-       self.table.reloadData()
+          userArray = userarray
+          self.table.reloadData()
     }
+    
+    func getMessages(_ messagearray:[Message],_ chatuserarray:[Users]){}
     
 }
     
