@@ -26,6 +26,7 @@ class RecentMessagesViewController: UIViewController
     
     override func viewDidLoad()
     {
+        
         super.viewDidLoad()
         presenter = RecentPresenter()
         
